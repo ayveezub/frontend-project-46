@@ -4,13 +4,19 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/419ff26af00d23c8c263/maintainability)](https://codeclimate.com/github/ayveezub/frontend-project-46/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/419ff26af00d23c8c263/test_coverage)](https://codeclimate.com/github/ayveezub/frontend-project-46/test_coverage)
 
-## Minimum reqs
+## About
+
+genDiff is a command line application that compares two configuration files and shows a difference.
+
+![flat-json-gendiff gif](./extra/promo/flat-json-gendiff.gif)
+
+## Requirements
 
 - node >= 20.14.0
 
 - npm >= 10.7.0
 
-## Setup
+## Installation
 
 ```bash
 make install
