@@ -6,14 +6,17 @@
   "bin": {
     "gendiff": "bin/gendiff.js"
   },
+  "lint-staged": {
+    "*.js": "eslint --fix"
+  },
   "simple-git-hooks": {
-    "pre-push": "make lint"
+    "pre-push": "npx lint-staged"
   },
   "engines": {
     "node": ">=14"
   },
   "scripts": {
-    "test": "echo \"No test specified\" && exit 0"
+    "test": "npx jest"
   },
   "repository": {
     "type": "git",
@@ -27,16 +30,17 @@
   "type": "module",
   "homepage": "https://github.com/ayveezub/frontend-project-46#readme",
   "devDependencies": {
-    "@eslint/create-config": "^1.0.1",
+    "@eslint/create-config": "^1.1.6",
     "@eslint/eslintrc": "^3.1.0",
-    "@eslint/js": "^9.4.0",
+    "@eslint/js": "^9.7.0",
     "@jest/globals": "^29.7.0",
-    "eslint": "^8.57.0",
+    "eslint": "8.57.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.29.1",
-    "globals": "^15.3.0",
+    "globals": "^15.8.0",
     "jest": "^29.7.0",
     "jest-cli": "^29.7.0",
+    "npm-check-updates": "^16.14.20",
     "simple-git-hooks": "^2.11.1"
   },
   "dependencies": {
