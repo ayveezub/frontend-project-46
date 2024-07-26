@@ -17,8 +17,12 @@ const expectedDiffOutput = `{
 + verbose: true
 }`;
 
-test('genDiff', () => {
-  const diffOutput = genDiff(getFixturePath('file1.json'), getFixturePath('file2.json'));
+test('show differences between two flat JSON files', () => {
+  const jsonDiffOutput = genDiff(getFixturePath('file1.json'), getFixturePath('file2.json'));
+  expect(jsonDiffOutput).toEqual(expectedDiffOutput);
+});
 
-  expect(diffOutput).toEqual(expectedDiffOutput);
+test('show differences between two flat YAML files', () => {
+  const yamlDiffOutput = genDiff(getFixturePath('file1.yml'), getFixturePath('file2.yml'));
+  expect(yamlDiffOutput).toEqual(expectedDiffOutput);
 });

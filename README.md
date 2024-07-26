@@ -10,7 +10,9 @@
 
 genDiff is a command line application that compares two configuration files and shows a difference.
 
-![flat-json-gendiff gif](./extra/promo/flat-json-gendiff.gif)
+- JSON: ![flat-json-gendiff gif](./extra/promo/flat-json-gendiff.gif)
+
+- YAML: ![flat-yaml-gendiff gif](./extra/promo/flat-yaml-gendiff.gif)
 
 ## Requirements
 

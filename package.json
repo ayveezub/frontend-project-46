@@ -1,6 +1,6 @@
 {
   "name": "@hexlet/code",
-  "version": "0.1.0",
+  "version": "0.2.1",
   "description": "Compares two configuration files and shows a difference.",
   "main": "src/main.js",
   "bin": {
@@ -45,6 +45,7 @@
   },
   "dependencies": {
     "commander": "^12.1.0",
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "yaml": "^2.5.0"
   }
 }
