@@ -5,7 +5,7 @@ import genDiff from '../src/main.js';
 
 const program = new Command();
 const option = new Option('-f, --format <type>', 'output format', 'stylish')
-  .choices(['stylish']);
+  .choices(['stylish', 'plain']);
 
 program
   .name('gendiff')
@@ -15,8 +15,8 @@ program
 program
   .arguments('<filepath1> <filepath2>')
   .addOption(option)
-  .action((first, second) => {
-    const diff = genDiff(first, second);
+  .action((first, second, options) => {
+    const diff = genDiff(first, second, options.format);
 
     console.log(diff);
   });

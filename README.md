@@ -8,11 +8,20 @@
 
 ## About
 
-genDiff is a command line application that compares two configuration files and shows a difference.
+```
+Usage: gendiff [options] <filepath1> <filepath2>
 
-- JSON: ![json-gendiff gif](./extra/promo/json-gendiff.gif)
+Compares two configuration files and shows a difference.
 
-- YAML: ![flat-yaml-gendiff gif](./extra/promo/flat-yaml-gendiff.gif)
+Options:
+  -V, --version        output the version number
+  -f, --format <type>  output format (choices: "stylish", "plain")
+  -h, --help           display help for command
+```
+
+- JSON (*"stylish"* format): ![stylish-json-gendiff gif](./extra/promo/stylish-json-gendiff.gif)
+
+- YAML (*"plain"* format): ![plain-yaml-gendiff gif](./extra/promo/plain-yaml-gendiff.gif)
 
 ## Requirements
 

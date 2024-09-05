@@ -15,8 +15,8 @@ const deepCheck = (data1, data2, path) => {
   return 'Updated';
 };
 
-const buildLeafNode = (type, key, data1, data2, path) => {
-  const newLeafNode = { type, key };
+const buildLeafNode = (type, path, data1, data2) => {
+  const newLeafNode = { type, path };
 
   if (_.has(data1, path)) {
     newLeafNode.value1 = _.get(data1, path);
@@ -28,9 +28,9 @@ const buildLeafNode = (type, key, data1, data2, path) => {
   return newLeafNode;
 };
 
-const buildNestedNode = (type, key, children) => ({
+const buildNestedNode = (type, path, children) => ({
   type,
-  key,
+  path,
   children,
 });
 
@@ -44,7 +44,7 @@ export default (data1, data2) => {
     const type = deepCheck(data1, data2, currentPath);
 
     if (type !== 'Nested') {
-      return buildLeafNode(type, currentKey, data1, data2, currentPath);
+      return buildLeafNode(type, currentPath, data1, data2);
     }
 
     const newKeys1 = Object.keys(_.get(data1, currentPath));
@@ -55,7 +55,7 @@ export default (data1, data2) => {
 
     const newChildren = newKeys.map((newKey) => iter(newKey, currentPath));
 
-    return buildNestedNode(type, currentKey, newChildren);
+    return buildNestedNode(type, currentPath, newChildren);
   };
 
   return {

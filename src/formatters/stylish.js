@@ -1,5 +1,7 @@
 import _ from 'lodash';
 
+const getKey = (node) => node.path.at(-1);
+
 const makeIndent = (depth, shiftToLeft = 0) => {
   const replacer = ' ';
   const spacesPerLevel = 4;
@@ -7,7 +9,7 @@ const makeIndent = (depth, shiftToLeft = 0) => {
   return replacer.repeat(depth * spacesPerLevel - shiftToLeft);
 };
 
-const stringifyValue = (initialValue, initialDepth) => {
+const stringify = (data, nodeDepth) => {
   const iter = (currentValue, depth) => {
     if (!_.isObject(currentValue)) {
       return `${currentValue}`;
@@ -26,39 +28,39 @@ const stringifyValue = (initialValue, initialDepth) => {
     ].join('\n');
   };
 
-  return iter(initialValue, initialDepth + 1);
+  return iter(data, nodeDepth + 1);
 };
 
-const stringifyLeafNode = (type, node, depth) => {
-  const { key } = node;
+const stringifyLeafNode = (node, depth) => {
+  const key = getKey(node);
   const value1 = node?.value1;
   const value2 = node?.value2;
   const indent = makeIndent(depth, 2);
 
+  const { type } = node;
   if (type === 'Removed') {
-    return `${indent}- ${key}: ${stringifyValue(value1, depth)}`;
+    return `${indent}- ${key}: ${stringify(value1, depth)}`;
   }
   if (type === 'Added') {
-    return `${indent}+ ${key}: ${stringifyValue(value2, depth)}`;
+    return `${indent}+ ${key}: ${stringify(value2, depth)}`;
   }
   if (type === 'Unchanged') {
-    return `${indent}  ${key}: ${stringifyValue(value1, depth)}`;
+    return `${indent}  ${key}: ${stringify(value1, depth)}`;
   }
   return [
-    `${indent}- ${key}: ${stringifyValue(value1, depth)}`,
-    `${indent}+ ${key}: ${stringifyValue(value2, depth)}`,
+    `${indent}- ${key}: ${stringify(value1, depth)}`,
+    `${indent}+ ${key}: ${stringify(value2, depth)}`,
   ].join('\n');
 };
 
-const stylish = (diffTree) => {
+export default (diffTree) => {
   const iter = (currentNode, depth) => {
     const { type } = currentNode;
-
     if (type !== 'Nested') {
-      return stringifyLeafNode(type, currentNode, depth);
+      return stringifyLeafNode(currentNode, depth);
     }
 
-    const { key } = currentNode;
+    const key = getKey(currentNode);
 
     return [
       `${makeIndent(depth)}${key}: {`,
@@ -72,9 +74,4 @@ const stylish = (diffTree) => {
     ...diffTree.children.map((node) => iter(node, 1)),
     '}',
   ].join('\n');
-};
-
-export default (diffTree, formatType) => {
-  if (formatType === 'stylish') return stylish(diffTree);
-  return null;
 };
