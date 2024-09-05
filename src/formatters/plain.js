@@ -4,7 +4,7 @@ const getPathString = (node) => node.path.join('.');
 
 const stringify = (data) => {
   if (_.isObject(data)) return '[complex value]';
-  if (_.isBoolean(data) || _.isNil(data)) {
+  if (_.isNumber(data) || _.isBoolean(data) || _.isNil(data)) {
     return `${data}`;
   }
   return `'${data}'`;
