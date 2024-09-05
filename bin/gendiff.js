@@ -1,9 +1,11 @@
 #!/usr/bin/env node
 
-import { Command } from 'commander';
+import { Command, Option } from 'commander';
 import genDiff from '../src/main.js';
 
 const program = new Command();
+const option = new Option('-f, --format <type>', 'output format', 'stylish')
+  .choices(['stylish']);
 
 program
   .name('gendiff')
@@ -12,7 +14,7 @@ program
 
 program
   .arguments('<filepath1> <filepath2>')
-  .option('-f, --format [type]', 'output format')
+  .addOption(option)
   .action((first, second) => {
     const diff = genDiff(first, second);
 
