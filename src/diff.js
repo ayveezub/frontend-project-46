@@ -16,16 +16,21 @@ const deepCheck = (data1, data2, path) => {
 };
 
 const buildLeafNode = (type, path, data1, data2) => {
-  const newLeafNode = { type, path };
+  const value1 = _.get(data1, path);
+  const value2 = _.get(data2, path);
 
-  if (_.has(data1, path)) {
-    newLeafNode.value1 = _.get(data1, path);
+  if (type === 'Removed') {
+    return ({ type, path, value1 });
   }
-  if (_.has(data2, path)) {
-    newLeafNode.value2 = _.get(data2, path);
+  if (type === 'Added') {
+    return ({ type, path, value2 });
   }
-
-  return newLeafNode;
+  return ({
+    type,
+    path,
+    value1,
+    value2,
+  });
 };
 
 const buildNestedNode = (type, path, children) => ({
@@ -35,9 +40,7 @@ const buildNestedNode = (type, path, children) => ({
 });
 
 export default (data1, data2) => {
-  const initialKeys = _
-    .union(Object.keys(data1), Object.keys(data2))
-    .sort();
+  const initialKeys = _.sortBy(_.union(Object.keys(data1), Object.keys(data2)));
 
   const iter = (currentKey, ancestry = []) => {
     const currentPath = [...ancestry, currentKey];
@@ -49,10 +52,7 @@ export default (data1, data2) => {
 
     const newKeys1 = Object.keys(_.get(data1, currentPath));
     const newKeys2 = Object.keys(_.get(data2, currentPath));
-    const newKeys = _
-      .union(newKeys1, newKeys2)
-      .sort();
-
+    const newKeys = _.sortBy(_.union(newKeys1, newKeys2));
     const newChildren = newKeys.map((newKey) => iter(newKey, currentPath));
 
     return buildNestedNode(type, currentPath, newChildren);
