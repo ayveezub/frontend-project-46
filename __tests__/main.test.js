@@ -11,27 +11,29 @@ const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', 
 
 let expectedStylishOutput;
 let expectedPlainOutput;
+let expectedJSONOutput;
 beforeAll(() => {
   expectedStylishOutput = readFileSync(getFixturePath('expectedStylishOutput.txt'), 'utf-8');
   expectedPlainOutput = readFileSync(getFixturePath('expectedPlainOutput.txt'), 'utf-8');
+  expectedJSONOutput = readFileSync(getFixturePath('expectedJSONOutput.txt'), 'utf-8');
 });
 
 test('show diffs between two JSON files (stylish format)', () => {
-  const jsonDiffOutput = genDiff(getFixturePath('file1.json'), getFixturePath('file2.json'));
-  expect(jsonDiffOutput).toEqual(expectedStylishOutput);
+  const diffOutput = genDiff(getFixturePath('file1.json'), getFixturePath('file2.json'));
+  expect(diffOutput).toEqual(expectedStylishOutput);
 });
 
 test('show diffs between two YAML files (stylish format)', () => {
-  const yamlDiffOutput = genDiff(getFixturePath('file1.yml'), getFixturePath('file2.yml'));
-  expect(yamlDiffOutput).toEqual(expectedStylishOutput);
+  const diffOutput = genDiff(getFixturePath('file1.yml'), getFixturePath('file2.yml'));
+  expect(diffOutput).toEqual(expectedStylishOutput);
 });
 
 test('show diffs between two JSON files (plain format)', () => {
-  const jsonDiffOutput = genDiff(getFixturePath('file1.json'), getFixturePath('file2.json'), 'plain');
-  expect(jsonDiffOutput).toEqual(expectedPlainOutput);
+  const diffOutput = genDiff(getFixturePath('file1.json'), getFixturePath('file2.json'), 'plain');
+  expect(diffOutput).toEqual(expectedPlainOutput);
 });
 
-test('show diffs between two YAML files (plain format)', () => {
-  const yamlDiffOutput = genDiff(getFixturePath('file1.yml'), getFixturePath('file2.yml'), 'plain');
-  expect(yamlDiffOutput).toEqual(expectedPlainOutput);
+test('show diffs between two JSON files (json format)', () => {
+  const diffOutput = genDiff(getFixturePath('file1.json'), getFixturePath('file2.json'), 'json');
+  expect(diffOutput).toEqual(expectedJSONOutput);
 });

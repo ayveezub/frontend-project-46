@@ -15,11 +15,13 @@ Compares two configuration files and shows a difference.
 
 Options:
   -V, --version        output the version number
-  -f, --format <type>  output format (choices: "stylish", "plain")
+  -f, --format <type>  output format (choices: "stylish", "plain", "json")
   -h, --help           display help for command
 ```
 
 - JSON (*"stylish"* format): ![stylish-json-gendiff gif](./extra/promo/stylish-json-gendiff.gif)
+
+- JSON (*"json"* format): ![json-json-gendiff gif](./extra/promo/json-json-gendiff.gif)
 
 - YAML (*"plain"* format): ![plain-yaml-gendiff gif](./extra/promo/plain-yaml-gendiff.gif)
 

@@ -5,7 +5,7 @@ import genDiff from '../src/main.js';
 
 const program = new Command();
 const option = new Option('-f, --format <type>', 'output format', 'stylish')
-  .choices(['stylish', 'plain']);
+  .choices(['stylish', 'plain', 'json']);
 
 program
   .name('gendiff')
