@@ -6,5 +6,5 @@ export default (diffTree, formatName) => {
   if (formatName === 'stylish') return stylish(diffTree);
   if (formatName === 'plain') return plain(diffTree);
   if (formatName === 'json') return json(diffTree);
-  return null;
+  throw new Error(`Unknown format: ${formatName}`);
 };

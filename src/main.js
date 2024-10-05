@@ -7,7 +7,7 @@ import format from './formatters/index.js';
 const getFileFormat = (filepath) => {
   if (filepath.endsWith('.json')) return 'json';
   if (filepath.endsWith('.yaml') || filepath.endsWith('.yml')) return 'yaml';
-  return null;
+  throw new Error(`Format of "${filepath}" not supported`);
 };
 
 export default (filepath1, filepath2, formatName = 'stylish') => {
